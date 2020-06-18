@@ -1,13 +1,18 @@
-name: "A workflow for my Hello World file"
+name: "Greeter"
 
 on: push
 
 jobs:
-  build:
-    name: Hello world action
+  greeter-job:
+    name: A job to say hello!
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: ./action-a
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Greeting step
+        id: greeting
+        uses: ./action-a
         with:
-          MY_NAME: "Mona"
+          USER_NAME: "dbgb"
+      - name: Output greeting time
+        run: echo "The time was ${{steps.greeting.outputs.time}}"
